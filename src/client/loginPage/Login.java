@@ -27,14 +27,14 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        username.setPromptText("UserName...");
-        password.setPromptText("PassWord...");
+        username.setPromptText("UserName : a-z A-z 0-9...");
+        password.setPromptText("PassWord : a-z A-z 0-9...");
 
         login.setOnAction(e -> goNext(new Authorize(username.getText(), password.getText()).authorize(host, port),
             "ログインできませんでした。", "認証エラー"));
 
         register.setOnAction(e -> goNext(new Register(username.getText(), password.getText()).register(host, port),
-            "usernameが重複しています。", "登録エラー"));
+            "重複或いは不正な文字列です。", "登録エラー"));
     }
 
     /**

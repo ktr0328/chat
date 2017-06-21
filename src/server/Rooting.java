@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -37,7 +38,8 @@ class Rooting {
             .stream()
             .anyMatch(user -> user.getUsername().equals(data.getUsername()));
 
-        if (!duplicated) {
+        Pattern p = Pattern.compile("[a-z]+|[A-Z]+|\\d+");
+        if (!duplicated && p.matcher(data.getUsername()).matches() && p.matcher(data.getPassword()).matches()) {
             Database.getUserList().add(new UserData(data.getUsername(), data.getPassword()));
 
             Database.writeFile(Database.getUserDataPath(),
@@ -49,7 +51,7 @@ class Rooting {
         new ObjectOutputStream(socket.getOutputStream()).writeObject(new Flag(!duplicated));
     }
 
-    // TODO メソッド名要修正
+    // TODO 要修正
     private static void ifMessage(Message data, Socket socket) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         System.out.println(data.getClass());
