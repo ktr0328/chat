@@ -6,13 +6,17 @@ import java.io.Serializable;
  * Created by ktr on 2017/06/21.
  */
 public class Flag extends Data implements Serializable {
-    private boolean isAuthorized;
+    private boolean isTrue;
 
-    public Flag(boolean isAuthorized) {
-        this.isAuthorized = isAuthorized;
+    /**
+     * True or Falseを送信するためのクラス
+     * @param isTrue flag
+     */
+    public Flag(boolean isTrue) {
+        this.isTrue = isTrue;
     }
 
-    public boolean isAuthorized() {
-        return isAuthorized;
+    public boolean isTrue() {
+        return isTrue;
     }
 }

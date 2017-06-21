@@ -32,7 +32,7 @@ class Server {
                     th.start();
                     th.join();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("なんかおかしい");
                 } catch (InterruptedException e) {
                     System.err.println("thread error");
                 }

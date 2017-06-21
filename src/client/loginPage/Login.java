@@ -1,8 +1,6 @@
 package client.loginPage;
 
 import client.Main;
-import common.Certification;
-import common.Flag;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -10,10 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -28,48 +22,31 @@ public class Login implements Initializable {
     public Button login;
     public Button register;
 
+    private String host = "localhost";
+    private int port = 2017;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         username.setPromptText("UserName...");
         password.setPromptText("PassWord...");
 
-        login.setOnAction(e -> {
-            if (Authorize()) Main.changeScene("root", 800, 600);
-            else {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "ログインできませんでした。", ButtonType.OK);
-                alert.setHeaderText("認証エラー");
-                alert.show();
-            }
-        });
-        register.setOnAction(e -> Register());
+        login.setOnAction(e -> goNext(new Authorize(username.getText(), password.getText()).authorize(host, port),
+            "ログインできませんでした。", "認証エラー"));
+
+        register.setOnAction(e -> goNext(new Register(username.getText(), password.getText()).register(host, port),
+            "usernameが重複しています。", "登録エラー"));
     }
 
-    private boolean Authorize() {
-        boolean flag = false;
-        try (
-            Socket socket = new Socket("localhost", 2017);
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        ) {
-            oos.writeObject(new Certification(username.getText(), password.getText()));
-            try {
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-                Flag boo = (Flag) ois.readObject();
-                flag = boo.isAuthorized();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            socket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    /**
+     * 移動に必要なelementを渡し渡し認証されればメイン画面へ移動
+     */
+    private void goNext(boolean element, String content, String header) {
+        if (element) {
+            Main.changeScene("root", 800, 600);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING, content, ButtonType.OK);
+            alert.setHeaderText(header);
+            alert.show();
         }
-
-        return flag;
-    }
-
-    private void Register() {
-        // TODO  認証 / rooting 機能
-        if (true) Main.changeScene("root", 800, 600);
-        else System.out.println("認証エラー");
     }
 }

@@ -3,16 +3,16 @@ package common;
 import java.io.Serializable;
 
 /**
- * Created by ktr on 2017/06/20.
+ * Created by ktr on 2017/06/21.
  */
-public class Certification extends Data implements Serializable {
+public class Registration extends Data implements Serializable {
     private String username;
     private String password;
 
     /**
-     * 認証キー
+     *  登録キー
      */
-    public Certification(String username, String password) {
+    public Registration(String username, String password) {
         this.username = username;
         this.password = password;
     }

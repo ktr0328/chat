@@ -15,16 +15,16 @@ public class Database {
     private static ArrayList<UserData> userList;
     private static List logData;
 
-    private String userDataPath;
-    private String logDataPath;
+    private static String userDataPath;
+    private static String logDataPath;
 
     public Database() {
         initialize();
     }
 
     private void initialize() {
-        this.userDataPath = "src/server/database/userData.csv";
-        this.logDataPath = "src/server/database/logData.csv";
+        userDataPath = "src/server/database/userData.csv";
+        logDataPath = "src/server/database/logData.csv";
 
         try {
             userList = getFile(userDataPath)
@@ -32,7 +32,6 @@ public class Database {
                 .map(e -> e.split(","))
                 .map(e -> new UserData(Integer.valueOf(e[0]), e[1], e[2]))
                 .collect(Collectors.toCollection(ArrayList::new));
-
         } catch (IOException e) {
             userList = new ArrayList<>();
             System.err.println("ファイルが見つかりません。");
@@ -50,7 +49,7 @@ public class Database {
         return Files.lines(Paths.get(path)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private void writeFile(String path, List<String> list) throws IOException {
+    public static void writeFile(String path, List<String> list) throws IOException {
         Files.write(Paths.get(path), list, Charset.forName("UTF-8"));
     }
 
@@ -60,5 +59,13 @@ public class Database {
 
     public static List getLogData() {
         return logData;
+    }
+
+    public static String getUserDataPath() {
+        return userDataPath;
+    }
+
+    public static String getLogDataPath() {
+        return logDataPath;
     }
 }

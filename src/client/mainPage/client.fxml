@@ -30,9 +30,6 @@
             <center>
                 <ListView fx:id="mainListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
             </center>
-            <bottom>
-                <TextArea prefHeight="70.0" prefWidth="300" text="テキストエリア" BorderPane.alignment="CENTER" />
-            </bottom>
             <top>
                 <BorderPane prefHeight="50.0" prefWidth="600" BorderPane.alignment="CENTER">
                     <right>
@@ -46,6 +43,16 @@
                </center>
                 </BorderPane>
             </top>
+         <bottom>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                      <TextArea prefHeight="70.0" prefWidth="300" text="テキストエリア" BorderPane.alignment="CENTER" />
+               </center>
+               <right>
+                  <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </bottom>
         </BorderPane>
         <ListView fx:id="userListView" prefHeight="200.0" prefWidth="200.0" />
     </GridPane>
