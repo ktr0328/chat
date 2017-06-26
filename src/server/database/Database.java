@@ -14,13 +14,15 @@ import java.util.stream.Collectors;
  * Created by ktr on 2017/06/20.
  */
 public class Database {
-    private static ArrayList<UserData> userList;
-    private static List<Message> logData;
+    private ArrayList<UserData> userList;
+    private List<Message> logData;
 
-    private static String userDataPath;
-    private static String logDataPath;
+    private String userDataPath;
+    private String logDataPath;
 
-    public Database() {
+    private static Database db = new Database();
+
+    private Database() {
         initialize();
     }
 
@@ -55,28 +57,32 @@ public class Database {
         return Files.lines(Paths.get(path)).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public static void writeFile(String path, List<String> list) throws IOException {
+    public void writeFile(String path, List<String> list) throws IOException {
         Files.write(Paths.get(path), list, Charset.forName("UTF-8"));
     }
 
-    public static List<Message> getEachLogData(String currentUser) {
+    public List<Message> getEachLogData(String currentUser) {
         // TODO
         return new ArrayList<>();
     }
 
-    public static List<UserData> getUserList() {
+    public List<UserData> getUserList() {
         return userList;
     }
 
-    public static List<Message> getLogData() {
+    public List<Message> getLogData() {
         return logData;
     }
 
-    public static String getUserDataPath() {
+    public String getUserDataPath() {
         return userDataPath;
     }
 
-    public static String getLogDataPath() {
+    public String getLogDataPath() {
         return logDataPath;
+    }
+
+    public static Database getDb() {
+        return db;
     }
 }

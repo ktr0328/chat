@@ -11,6 +11,7 @@ import java.net.Socket;
  */
 public class ServerThread extends Thread {
     private Socket socket;
+    private Rooter rooter = Rooter.getRooter();
 
     ServerThread(Socket socket) {
         this.socket = socket;
@@ -19,7 +20,7 @@ public class ServerThread extends Thread {
     @Override
     public void run() {
         try (ObjectInputStream ois = new ObjectInputStream(this.socket.getInputStream())) {
-            Rooting.rooting((Data) ois.readObject(), socket);
+            rooter.rooting((Data) ois.readObject(), socket);
 
             this.socket.close();
         } catch (IOException e) {

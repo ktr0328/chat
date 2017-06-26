@@ -18,7 +18,7 @@ class Server {
 
     Server(int port) {
         this.port = port;
-        this.database = new Database();
+        this.database = Database.getDb();
         this.threads = new ArrayList<>();
     }
 
