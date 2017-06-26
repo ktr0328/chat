@@ -22,7 +22,7 @@ public class Message extends Data implements Serializable {
 
     @Override
     public String toString() {
-        return this.name + " : ";
+        return this.name + " : [from " + this.from + "] " + this.message + " @" + time + " -> " + this.room;
     }
 
     public String getFrom() {
