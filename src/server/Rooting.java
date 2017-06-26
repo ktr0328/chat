@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 class Rooting {
 
     /**
-     *  送信されてきたものをルーティングし個別の処理を行う
+     * 送信されてきたものをルーティングし個別の処理を行う
      */
     static void rooting(Data data, Socket socket) throws IOException {
         if (data instanceof Certification) authorize((Certification) data, socket);
@@ -44,16 +44,20 @@ class Rooting {
 
             Database.writeFile(Database.getUserDataPath(),
                 Database.getUserList().stream()
-                .map(user -> user.getId() + "," + user.getUsername() + "," + user.getPassword())
-                .collect(Collectors.toCollection(ArrayList::new))
+                    .map(user -> user.getId() + "," + user.getUsername() + "," + user.getPassword())
+                    .collect(Collectors.toCollection(ArrayList::new))
             );
         }
         new ObjectOutputStream(socket.getOutputStream()).writeObject(new Flag(!duplicated));
     }
 
-    // TODO 要修正
     private static void ifMessage(Message data, Socket socket) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+        Database.writeFile(Database.getLogDataPath(),
+            Database.getLogData().stream()
+                .map(msg -> msg.getFrom() + "," + msg.getName() + "," + msg.getMessage() + "," + msg.getTime() + "," + msg.getRoom())
+                .collect(Collectors.toCollection(ArrayList::new))
+        );
+        new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(Database.getEachLogData(data.getCurrentUser())));
         System.out.println(data.getClass());
     }
 }
