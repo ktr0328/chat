@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -33,25 +34,27 @@
             <top>
                 <BorderPane prefHeight="50.0" prefWidth="600" BorderPane.alignment="CENTER">
                     <right>
-                        <Button mnemonicParsing="false" text="logout" BorderPane.alignment="CENTER" />
+                        <Button mnemonicParsing="false" text="logout" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets right="20.0" />
+                     </BorderPane.margin></Button>
                     </right>
                <left>
-                  <Label text="Label" BorderPane.alignment="CENTER" />
+                  <Label text="Label" BorderPane.alignment="CENTER_LEFT">
+                     <BorderPane.margin>
+                        <Insets left="20.0" />
+                     </BorderPane.margin></Label>
                </left>
                <center>
-                  <Label text="Label" BorderPane.alignment="CENTER" />
+                  <Label text="Label" BorderPane.alignment="CENTER_LEFT">
+                     <BorderPane.margin>
+                        <Insets left="40.0" />
+                     </BorderPane.margin></Label>
                </center>
                 </BorderPane>
             </top>
          <bottom>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <center>
-                      <TextArea prefHeight="70.0" prefWidth="300" text="テキストエリア" BorderPane.alignment="CENTER" />
-               </center>
-               <right>
-                  <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-               </right>
-            </BorderPane>
+                <TextArea fx:id="messageArea" maxHeight="100.0" text="テキストエリア" BorderPane.alignment="CENTER" />
          </bottom>
         </BorderPane>
         <ListView fx:id="userListView" prefHeight="200.0" prefWidth="200.0" />
