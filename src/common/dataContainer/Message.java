@@ -1,4 +1,4 @@
-package common;
+package common.dataContainer;
 
 import java.io.Serializable;
 

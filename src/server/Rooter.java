@@ -1,6 +1,6 @@
 package server;
 
-import common.*;
+import common.dataContainer.*;
 import server.database.Database;
 import server.database.UserData;
 
@@ -58,7 +58,7 @@ class Rooter {
 
     private void ifMessage(Message data, Socket socket) throws IOException {
         db.writeFile(db.getLogDataPath(),
-            db.getLogData().stream()
+            db.getMessageList().stream()
                 .map(msg -> msg.getFrom() + "," + msg.getName() + "," + msg.getMessage() + "," + msg.getTime() + "," + msg.getRoom())
                 .collect(Collectors.toCollection(ArrayList::new))
         );

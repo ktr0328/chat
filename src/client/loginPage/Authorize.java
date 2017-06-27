@@ -1,7 +1,7 @@
 package client.loginPage;
 
-import common.Certification;
-import common.Flag;
+import common.dataContainer.Certification;
+import common.dataContainer.Flag;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

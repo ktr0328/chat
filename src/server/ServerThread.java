@@ -1,6 +1,6 @@
 package server;
 
-import common.Data;
+import common.dataContainer.Data;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

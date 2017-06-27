@@ -1,6 +1,6 @@
 package client.mainPage;
 
-import common.Message;
+import common.dataContainer.Message;
 import client.mainPage.components.MainCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

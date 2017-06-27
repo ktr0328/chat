@@ -1,6 +1,6 @@
 package server.database;
 
-import common.Message;
+import common.dataContainer.Message;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class Database {
     private ArrayList<UserData> userList;
-    private List<Message> logData;
+    private List<Message> messageList;
 
     private String userDataPath;
     private String logDataPath;
@@ -42,13 +42,13 @@ public class Database {
         }
 
         try {
-            logData = getFile(logDataPath)
+            messageList = getFile(logDataPath)
                 .stream()
                 .map(e -> e.split(","))
                 .map(e -> new Message(e[0], e[1], e[2], e[3], Integer.parseInt(e[4])))
                 .collect(Collectors.toCollection(ArrayList::new));
         } catch (Exception e) {
-            logData = new ArrayList<>();
+            messageList = new ArrayList<>();
             System.err.println("ファイルが見つかりません。");
         }
     }
@@ -70,8 +70,8 @@ public class Database {
         return userList;
     }
 
-    public List<Message> getLogData() {
-        return logData;
+    public List<Message> getMessageList() {
+        return messageList;
     }
 
     public String getUserDataPath() {

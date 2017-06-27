@@ -1,7 +1,7 @@
 package client.loginPage;
 
-import common.Flag;
-import common.Registration;
+import common.dataContainer.Flag;
+import common.dataContainer.Registration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
