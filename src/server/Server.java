@@ -7,6 +7,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by ktr on 2017/06/19.
@@ -14,12 +18,12 @@ import java.util.List;
 class Server {
     private int port;
     private Database database;
-    private List<Thread> threads;
+    private ExecutorService exec;
 
     Server(int port) {
         this.port = port;
         this.database = Database.getDb();
-        this.threads = new ArrayList<>();
+        exec = Executors.newFixedThreadPool(3);
     }
 
     void runServer() {
@@ -27,14 +31,11 @@ class Server {
             System.out.println("server running...");
 
             while (!server.isClosed()) {
-                try (Socket socket = server.accept()) {
-                    Thread th = new ServerThread(socket);
-                    th.start();
-                    th.join();
+                try {
+                    final Socket socket = server.accept();
+                    exec.execute(new ServerThread(socket));
                 } catch (IOException e) {
                     System.err.println("なんかおかしい");
-                } catch (InterruptedException e) {
-                    System.err.println("thread error");
                 }
             }
         } catch (IOException e) {
