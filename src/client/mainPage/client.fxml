@@ -54,7 +54,7 @@
                 </BorderPane>
             </top>
          <bottom>
-                <TextArea fx:id="messageArea" maxHeight="100.0" text="テキストエリア" BorderPane.alignment="CENTER" />
+                <TextArea fx:id="messageArea" maxHeight="100.0" onKeyReleased="#pressedEnter" text="テキストエリア" BorderPane.alignment="CENTER" />
          </bottom>
         </BorderPane>
         <ListView fx:id="userListView" prefHeight="200.0" prefWidth="200.0" />

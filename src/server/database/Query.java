@@ -1,6 +1,6 @@
 package server.database;
 
-import common.dataContainer.Message;
+import common.Message;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,8 +18,10 @@ public class Query {
         return query;
     }
 
-    // 差分の取得
-    public List<Message> getFilteredMessageList(String key) {
+    /**
+     *  日付で差分の取得
+     */
+    public List<Message> getListFilteredInDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");
         return db.getMessageList().stream()
             .filter(e -> {
@@ -27,12 +29,21 @@ public class Query {
                 long b = 0;
                 try {
                     a = sdf.parse(e.getTime()).getTime();
-                    b = sdf.parse(key).getTime();
+                    b = sdf.parse(date).getTime();
                 } catch (ParseException e1) {
                     e1.printStackTrace();
                 }
                 return a > b;
             })
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Roomでフィルター
+     */
+    public List<Message> getListFilteredInRoom(int room) {
+        return db.getMessageList().stream()
+            .filter(e -> e.getRoom() == room)
             .collect(Collectors.toList());
     }
 }

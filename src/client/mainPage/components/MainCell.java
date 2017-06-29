@@ -1,6 +1,6 @@
 package client.mainPage.components;
 
-import common.dataContainer.Message;
+import common.Message;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;

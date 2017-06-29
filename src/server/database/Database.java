@@ -1,6 +1,6 @@
 package server.database;
 
-import common.dataContainer.Message;
+import common.Message;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

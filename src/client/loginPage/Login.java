@@ -27,6 +27,9 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TODO テスト
+        username.setText("admin");
+        password.setText("admin");
         username.setPromptText("UserName : a-z A-z 0-9...");
         password.setPromptText("PassWord : a-z A-z 0-9...");
 
@@ -40,8 +43,8 @@ public class Login implements Initializable {
     /**
      * 移動に必要なelementを渡し渡し認証されればメイン画面へ移動
      */
-    private void goNext(boolean element, String content, String header) {
-        if (element) {
+    private void goNext(boolean isTrue, String content, String header) {
+        if (isTrue) {
             Main.changeScene("root", 800, 600);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, content, ButtonType.OK);

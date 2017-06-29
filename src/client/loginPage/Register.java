@@ -1,7 +1,7 @@
 package client.loginPage;
 
-import common.dataContainer.Flag;
-import common.dataContainer.Registration;
+import common.Flag;
+import common.Registration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -23,7 +23,7 @@ class Register {
     }
 
     boolean register(String host, int port) {
-        boolean flag = false;
+        boolean isRegistered = false;
         try (Socket socket = new Socket(host, port)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Username : " + username
                 + "\r\nPassword : " + password, ButtonType.OK, ButtonType.CANCEL);
@@ -33,14 +33,14 @@ class Register {
                 new ObjectOutputStream(socket.getOutputStream()).writeObject(new Registration(username, password));
 
                 Flag isNotEmpty = (Flag) new ObjectInputStream(socket.getInputStream()).readObject();
-                flag = isNotEmpty.isTrue();
+                isRegistered = isNotEmpty.isTrue();
 
                 socket.close();
             }
         } catch (IOException | ClassNotFoundException e) {
-            flag = false;
+            isRegistered = false;
         }
 
-        return flag;
+        return isRegistered;
     }
 }

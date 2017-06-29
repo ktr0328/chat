@@ -1,7 +1,7 @@
 package client.loginPage;
 
-import common.dataContainer.Certification;
-import common.dataContainer.Flag;
+import common.Certification;
+import common.Flag;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,19 +24,19 @@ public class Authorize {
     }
 
     boolean authorize(String host, int port) {
-        boolean flag;
+        boolean isAuthorized;
 
         try (Socket socket = new Socket(host, port)) {
             new ObjectOutputStream(socket.getOutputStream()).writeObject(new Certification(username, password));
 
-            Flag isAuthorized = (Flag) new ObjectInputStream(socket.getInputStream()).readObject();
-            flag = isAuthorized.isTrue();
+            Flag tmp = (Flag) new ObjectInputStream(socket.getInputStream()).readObject();
+            isAuthorized = tmp.isTrue();
 
             socket.close();
         } catch (IOException | ClassNotFoundException e) {
-            flag = false;
+            isAuthorized = false;
         }
 
-        return flag;
+        return isAuthorized;
     }
 }

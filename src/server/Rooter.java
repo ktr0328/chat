@@ -1,6 +1,6 @@
 package server;
 
-import common.dataContainer.*;
+import common.*;
 import server.database.Database;
 import server.database.UserData;
 
@@ -39,12 +39,12 @@ class Rooter {
     }
 
     private void register(Registration data, Socket socket) throws IOException {
-        boolean duplicated = db.getUserList()
+        boolean isNotDuplicate = db.getUserList()
             .stream()
-            .anyMatch(user -> user.getUsername().equals(data.getUsername()));
+            .noneMatch(user -> user.getUsername().equals(data.getUsername()));
 
         Pattern p = Pattern.compile("[a-z]+|[A-Z]+|\\d+");
-        if (!duplicated && p.matcher(data.getUsername()).matches() && p.matcher(data.getPassword()).matches()) {
+        if (isNotDuplicate && p.matcher(data.getUsername()).matches() && p.matcher(data.getPassword()).matches()) {
             db.getUserList().add(new UserData(data.getUsername(), data.getPassword()));
 
             db.writeFile(db.getUserDataPath(),
@@ -53,7 +53,7 @@ class Rooter {
                     .collect(Collectors.toCollection(ArrayList::new))
             );
         }
-        new ObjectOutputStream(socket.getOutputStream()).writeObject(new Flag(!duplicated));
+        new ObjectOutputStream(socket.getOutputStream()).writeObject(new Flag(!isNotDuplicate));
     }
 
     private void ifMessage(Message data, Socket socket) throws IOException {

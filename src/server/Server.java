@@ -1,7 +1,6 @@
 package server;
 
 import server.database.Database;
-import server.database.Query;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -29,12 +28,11 @@ class Server {
 
             while (!server.isClosed()) {
                 try (Socket socket = server.accept()) {
-                    Query.getInstance().getFilteredMessageList("2017/06/27 11:10").forEach(System.out::println);
                     Thread th = new ServerThread(socket);
                     th.start();
                     th.join();
                 } catch (IOException e) {
-                    System.out.println("なんかおかしい");
+                    System.err.println("なんかおかしい");
                 } catch (InterruptedException e) {
                     System.err.println("thread error");
                 }
