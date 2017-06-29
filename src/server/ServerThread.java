@@ -5,8 +5,6 @@ import common.Data;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.concurrent.ExecutorService;
 
 /**
  * Created by ktr on 2017/06/20.
