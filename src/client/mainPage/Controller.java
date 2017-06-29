@@ -30,6 +30,8 @@ public class Controller implements Initializable {
 
         messages.add(new Message("fromB", "あうあう", "message2", "2017/06/19", 1));
         userListView.getItems().add("ユーザーリスト");
+
+        messages.addAll(MessageQuery.getMessageQuery().getAllMessage());
     }
 
     private void initializeMainListView() {

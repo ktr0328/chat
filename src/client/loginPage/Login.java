@@ -1,5 +1,6 @@
 package client.loginPage;
 
+import client.Config;
 import client.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,8 +23,9 @@ public class Login implements Initializable {
     public Button login;
     public Button register;
 
-    private String host = "localhost";
-    private int port = 2017;
+    private String host = Config.client.getHost();
+    private int port = Config.client.getPort();
+    private static String currentUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,10 +48,15 @@ public class Login implements Initializable {
     private void goNext(boolean isTrue, String content, String header) {
         if (isTrue) {
             Main.changeScene("root", 800, 600);
+            currentUser = username.getText();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, content, ButtonType.OK);
             alert.setHeaderText(header);
             alert.show();
         }
+    }
+
+    public static String getCurrentUser() {
+        return currentUser;
     }
 }

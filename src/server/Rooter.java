@@ -2,12 +2,14 @@ package server;
 
 import common.*;
 import server.database.Database;
+import server.database.Query;
 import server.database.UserData;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -28,6 +30,7 @@ class Rooter {
         if (data instanceof Certification) authorize((Certification) data, socket);
         else if (data instanceof Registration) register((Registration) data, socket);
         else if (data instanceof Message) ifMessage((Message) data, socket);
+        else if (data instanceof SearchKey) isQuery((SearchKey) data, socket);
     }
 
     private void authorize(Certification data, Socket socket) throws IOException {
@@ -64,6 +67,11 @@ class Rooter {
         );
         new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(db.getEachLogData(data.getCurrentUser())));
         System.out.println(data.getClass());
+    }
+
+    private void isQuery(SearchKey data, Socket socket) throws IOException {
+        List<Message> list = Query.getInstance().getAllMessages(data.getCurrentUser());
+        new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(list));
     }
 
     public static Rooter getRooter() {

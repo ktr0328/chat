@@ -18,10 +18,14 @@ public class Query {
         return query;
     }
 
+    public List<Message> getAllMessages(String currentUser) {
+        return db.getMessageList();
+    }
+
     /**
      *  日付で差分の取得
      */
-    public List<Message> getListFilteredInDate(String date) {
+    public List<Message> getListFilteredInDate(String currentUser, String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd hh:mm");
         return db.getMessageList().stream()
             .filter(e -> {
@@ -41,7 +45,7 @@ public class Query {
     /**
      * Roomでフィルター
      */
-    public List<Message> getListFilteredInRoom(int room) {
+    public List<Message> getListFilteredInRoom(String currentUser, int room) {
         return db.getMessageList().stream()
             .filter(e -> e.getRoom() == room)
             .collect(Collectors.toList());
