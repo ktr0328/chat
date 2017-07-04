@@ -12,9 +12,9 @@ public class Message extends Data implements Serializable {
     private String time;
     private int room;
 
-    public Message(String from, String name, String message, String time, int room) {
+    public Message(String from, String To, String message, String time, int room) {
         this.from = from;
-        this.name = name;
+        this.name = To;
         this.message = message;
         this.time = time;
         this.room = room;
@@ -22,7 +22,8 @@ public class Message extends Data implements Serializable {
 
     @Override
     public String toString() {
-        return this.name + " : [from " + this.from + "] " + this.message + " @" + time + " -> " + this.room;
+        return "To " + this.name + " : [from " + this.from + "] " + " @" + time + " -> " + this.room
+            + System.getProperty("line.separator")  + this.message;
     }
 
     public String getFrom() {

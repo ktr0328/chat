@@ -2,6 +2,7 @@ package client.loginPage;
 
 import client.Config;
 import client.Main;
+import client.mainPage.Receiver;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -49,6 +50,7 @@ public class Login implements Initializable {
         if (isTrue) {
             Main.changeScene("root", 800, 600);
             currentUser = username.getText();
+            new Receiver().start();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING, content, ButtonType.OK);
             alert.setHeaderText(header);

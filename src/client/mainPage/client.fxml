@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import client.mainPage.components.SubmitTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mainPage.Controller">
+<GridPane alignment="center" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.mainPage.Controller">
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints />
@@ -29,33 +29,36 @@
         </rowConstraints>
         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
             <center>
-                <ListView fx:id="mainListView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <ListView fx:id="mainListView" onKeyPressed="#onPressedEnterKey" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
             </center>
             <top>
                 <BorderPane prefHeight="50.0" prefWidth="600" BorderPane.alignment="CENTER">
                     <right>
                         <Button mnemonicParsing="false" text="logout" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets right="20.0" />
-                     </BorderPane.margin></Button>
+                            <BorderPane.margin>
+                                <Insets right="20.0" />
+                            </BorderPane.margin>
+                        </Button>
                     </right>
-               <left>
-                  <Label text="Label" BorderPane.alignment="CENTER_LEFT">
-                     <BorderPane.margin>
-                        <Insets left="20.0" />
-                     </BorderPane.margin></Label>
-               </left>
-               <center>
-                  <Label text="Label" BorderPane.alignment="CENTER_LEFT">
-                     <BorderPane.margin>
-                        <Insets left="40.0" />
-                     </BorderPane.margin></Label>
-               </center>
+                    <left>
+                        <Label text="Label" BorderPane.alignment="CENTER_LEFT">
+                            <BorderPane.margin>
+                                <Insets left="20.0" />
+                            </BorderPane.margin>
+                        </Label>
+                    </left>
+                    <center>
+                        <Label text="Label" BorderPane.alignment="CENTER_LEFT">
+                            <BorderPane.margin>
+                                <Insets left="40.0" />
+                            </BorderPane.margin>
+                        </Label>
+                    </center>
                 </BorderPane>
             </top>
-         <bottom>
-                <TextArea fx:id="messageArea" maxHeight="100.0" onKeyReleased="#pressedEnter" text="テキストエリア" BorderPane.alignment="CENTER" />
-         </bottom>
+            <bottom>
+                <SubmitTextArea fx:id="messageArea" maxHeight="100.0" onKeyPressed="#onPressedEnterKey" text="テキストエリア" BorderPane.alignment="CENTER" />
+            </bottom>
         </BorderPane>
         <ListView fx:id="userListView" prefHeight="200.0" prefWidth="200.0" />
     </GridPane>

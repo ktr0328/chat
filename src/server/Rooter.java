@@ -66,7 +66,7 @@ class Rooter {
                 .collect(Collectors.toCollection(ArrayList::new))
         );
         new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(db.getEachLogData(data.getCurrentUser())));
-        System.out.println(data.getClass());
+        System.out.println(data.toString());
     }
 
     private void isQuery(SearchKey data, Socket socket) throws IOException {
