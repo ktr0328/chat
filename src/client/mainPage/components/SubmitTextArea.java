@@ -2,7 +2,7 @@ package client.mainPage.components;
 
 import client.loginPage.Login;
 import client.mainPage.Controller;
-import client.mainPage.Sender;
+import client.Sender;
 import common.Message;
 import javafx.scene.control.TextArea;
 
@@ -26,7 +26,7 @@ public class SubmitTextArea extends TextArea {
             );
             Controller.getMessages().add(message);
             try {
-                Sender.getSender().send(message);
+                Sender.getSender().sendAsync(message);
             } catch (ClassNotFoundException | IOException e) {
                 e.printStackTrace();
             }

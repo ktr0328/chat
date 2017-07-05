@@ -1,5 +1,6 @@
 package client.mainPage;
 
+import client.Sender;
 import client.mainPage.components.MainCell;
 import client.mainPage.components.SubmitTextArea;
 import common.Message;

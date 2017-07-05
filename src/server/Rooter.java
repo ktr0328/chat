@@ -65,7 +65,7 @@ class Rooter {
                 .map(msg -> msg.getFrom() + "," + msg.getName() + "," + msg.getMessage() + "," + msg.getTime() + "," + msg.getRoom())
                 .collect(Collectors.toCollection(ArrayList::new))
         );
-        new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(db.getEachLogData(data.getCurrentUser())));
+//        new ObjectOutputStream(socket.getOutputStream()).writeObject(new MessageList(db.getEachLogData(data.getCurrentUser())));
         System.out.println(data.toString());
     }
 

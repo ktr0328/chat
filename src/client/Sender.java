@@ -1,6 +1,5 @@
-package client.mainPage;
+package client;
 
-import client.Config;
 import client.loginPage.Login;
 import common.Data;
 import common.Message;
@@ -26,7 +25,10 @@ public class Sender {
 
     }
 
-    public Data send(Data data) throws ClassNotFoundException, IOException {
+    /**
+     * 戻り値が欲しい時用
+     */
+    public Data sendSync(Data data) throws ClassNotFoundException, IOException {
         Socket socket = new Socket(Config.client.getHost(), Config.client.getPort());
         new ObjectOutputStream(socket.getOutputStream()).writeObject(data);
 
@@ -36,11 +38,23 @@ public class Sender {
         return d;
     }
 
-    List<Message> getAllMessage() {
+    /**
+     * 戻り値がいらない時用
+     * <p>
+     * ex.) Message
+     */
+    public void sendAsync(Data data) throws ClassNotFoundException, IOException {
+        Socket socket = new Socket(Config.client.getHost(), Config.client.getPort());
+        new ObjectOutputStream(socket.getOutputStream()).writeObject(data);
+
+        socket.close();
+    }
+
+    public List<Message> getAllMessage() {
         SearchKey searchKey = new SearchKey(this.currentUser);
         MessageList messageList;
         try {
-            messageList = (MessageList) send(searchKey);
+            messageList = (MessageList) sendSync(searchKey);
         } catch (ClassNotFoundException | IOException e) {
             messageList = new MessageList(new ArrayList<>());
         }
